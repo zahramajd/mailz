@@ -1,0 +1,12 @@
+version: '2'
+services:
+    www:
+        image: pooya/laas
+        volumes:
+            - .:/var/www/laravel
+        ports:
+            - 7080:80
+        external_links:
+            - mongo_mongo_1:mongo    
+        network_mode: "bridge"
+        restart: always
