@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -43,23 +44,24 @@ class AuthController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        return Validator::make(\Request::all(), [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required',
-            'captcha' => 'required'
+            'captcha' => 'required|min:3|max:3'
+            //'captcha' => 'required|captcha' //TODO
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)
@@ -69,5 +71,14 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+
+    protected function authenticated($request, User $user)
+    {
+        $user->login2 = $user->login1;
+        $user->login1 = new \DateTime();
+        $user->save();
+        return redirect()->intended($this->redirectPath());
     }
 }

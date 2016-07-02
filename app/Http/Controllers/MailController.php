@@ -55,8 +55,10 @@ class MailController extends Controller
         ]);
     }
 
-    public function read(Mail $mail)
+    public function read($mail_id)
     {
+        $mail = Mail::withTrashed()->where('_id', $mail_id)->firstOrFail();
+
         if ($mail->from_id != Auth::user()->id) {
             $mail->read = true;
             $mail->save();
@@ -88,14 +90,16 @@ class MailController extends Controller
             $u->name = $request->get('name');
 
         if ($request->has('password'))
-            $u->name = Hash::make($request->get('password'));
+            $u->password = Hash::make($request->get('password'));
 
         if ($request->hasFile('avatar')) {
-
             $request->file('avatar')->move('upload/avatar', $u->id . '.png');
-
         }
-        
+
+        if ($request->hasFile('background')) {
+            $request->file('background')->move('upload/background', $u->id . '.png');
+        }
+
         $u->save();
 
         return redirect('/profile')->with(['message' => 'Profile Saved!']);
@@ -169,6 +173,16 @@ class MailController extends Controller
         $mail->to_id = $to->id;
 
         $mail->save();
+
+
+        if ($request->hasFile('attachment')) {
+            $file = $request->file('attachment');
+            $d = 'upload/attachment/' . $mail->id;
+            mkdir($d);
+            $n = $file->getClientOriginalName();
+            $file->move($d, $n);
+            $mail->push('attachments', $n);
+        }
 
         return redirect()->back();
     }

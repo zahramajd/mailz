@@ -17,7 +17,8 @@
                             <div class="caption">
                                 <h3>{{$user->name}}</h3>
                                 <p>{{$user->email}}</p>
-                                <p><a href="/contacts/reject/{{$user->id}}" class="btn btn-danger" role="button">Reject</a>
+                                <p><a href="/contacts/reject/{{$user->id}}" class="btn btn-danger"
+                                      role="button">Remove</a>
                             </div>
                         </div>
                     </div>
@@ -37,24 +38,21 @@
                             <div class="caption">
                                 <h3>{{$user->name}}</h3>
                                 <p>{{$user->email}}</p>
-                                <p><a href="/contacts/add/{{$user->id}}" class="btn btn-info" role="button">Add To Contacts</a>
+                                <p><a href="/contacts/add/{{$user->id}}" class="btn btn-info" role="button">Add To
+                                        Contacts</a>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
-
         </div>
+    </div>
+
+@endsection
 
 
-        @endsection
-
-
-        @section('toolbar')
-
-            <button type="button" class="btn btn-default">
-                &nbsp;&nbsp;&nbsp;Add <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;
-            </button>
-
-
+@section('toolbar')
+    <a type="button" class="btn btn-default" href="{{url('/inbox')}}">
+        &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;&nbsp;&nbsp;
+    </a>
 @endsection
