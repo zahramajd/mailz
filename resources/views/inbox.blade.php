@@ -17,24 +17,33 @@
             <div class="list-group mail-items">
 
                 <div v-if="mails!=null">
-                    <div v-for="mail in mails">
-                        <a href="/read/@{{mail._id}}" v-bind:class="['list-group-item',(mail.read==null)?'unread':'']">
-                            <span class="glyphicon glyphicon-star-empty"></span>
+                    <div v-if="mails.length!=0">
+                        <div v-for="mail in mails">
+                            <a href="/read/@{{mail._id}}"
+                               v-bind:class="['list-group-item',(mail.read==null)?'unread':'',(mail.spam!=null)?'spam':'']">
+                                <span class="glyphicon glyphicon-star-empty"></span>
                             <span class="name" style="min-width: 120px;
                                 display: inline-block;">@{{mail.from.name}}</span>
-                            <span class="">@{{mail.subject}}</span>
-                            <span class="text-muted mail_item_description">...</span>
-                            <span class="badge">@{{mail.created_at}}</span>
+                                <span class="">@{{mail.subject}}</span>
+                                <span class="text-muted mail_item_description">...</span>
+                                <span class="badge">@{{mail.created_at}}</span>
 
                          <span class="pull-right">
-                             <span class="glyphicon glyphicon-paperclip"></span>
+                             <span  v-if="mail.attachments && mail.attachments.length>0"
+                                     class="glyphicon glyphicon-paperclip"></span>
                          </span>
 
-                        </a>
+                            </a>
+                        </div>
+                    </div>
+                    <div v-else="">
+                        <h3 class="text-muted text-center inbox-message" unselectable="on">There is nothing in @{{tab}}
+                            :)</h3>
                     </div>
                 </div>
                 <div v-else="">
-                    Loading...
+                    <h3 class="text-muted text-center inbox-message" unselectable="on">Loading...</h3>
+
                 </div>
 
             </div>

@@ -1,7 +1,8 @@
 <div class="modal" id="modalCompose">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form role="form" class="form-horizontal" method="post" action="{{url('/compose')}}">
+            <form role="form" class="form-horizontal" method="post" action="{{url('/compose')}}"
+                  enctype="multipart/form-data">
 
 
                 <div class="modal-header">
@@ -24,6 +25,12 @@
                     <div class="form-group">
                         <div class="col-sm-12">
                             <textarea class="summernote" id="inputBody" name="text"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="file" class="form-control" id="inputAttachment" placeholder="Attachment"
+                                   name="attachment">
                         </div>
                     </div>
                 </div>

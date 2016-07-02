@@ -1,3 +1,13 @@
+@import "bootstrap.lumen.css";
+@import "summernote.css";
+
+body{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 .nav-tabs .glyphicon:not(.no-margin) {
     margin-right: 10px;
 }
@@ -109,4 +119,16 @@ body {
 
 .mail-items .spam {
     color: #e2d50c;
+}
+
+.inbox-message{
+    margin-top: 150px;
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+    cursor: hand;
+}
+
+.preview{
+    max-height: 150px;
 }

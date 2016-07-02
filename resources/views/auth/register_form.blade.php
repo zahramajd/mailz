@@ -2,7 +2,6 @@
     <div class="panel-heading">Register</div>
     <div class="panel-body">
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
-            {{ csrf_field() }}
 
             <div class="form-group">
                 <label for="name" class="col-md-4 control-label">Name</label>
@@ -42,8 +41,8 @@
 
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">
-                    <button type="submit" class="btn btn-danger">
-                        <i class="fa fa-btn fa-user"></i> Register
+                    <button type="submit" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-user"></i> Register
                     </button>
                 </div>
             </div>
